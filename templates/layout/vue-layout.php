@@ -1,3 +1,7 @@
+<?php
+use Cake\Routing\Router;
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +24,8 @@
     If Vue would be running fine, you wouldn't be seeing this message!<br />
     Vue would use this element to load itself.
 </div>
+<script type="text/javascript" defer src="<?= Router::url('/') ?>webroot/vue/js/chunk-vendors.js"></script>
+<script type="text/javascript" defer src="<?= Router::url('/') ?>webroot/vue/js/app.js"></script>
 </body>
 </html>
 
