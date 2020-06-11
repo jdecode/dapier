@@ -1,3 +1,6 @@
+# PHP CodeSniffer cache - used by editors
+.php_cs.cache
+
 .DS_Store
 node_modules
 /dist

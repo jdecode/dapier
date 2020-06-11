@@ -70,4 +70,9 @@ class PagesController extends AppController
             throw new NotFoundException();
         }
     }
+
+    public function vue()
+    {
+        $this->viewBuilder()->setLayout('vue-layout');
+    }
 }
