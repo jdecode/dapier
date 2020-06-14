@@ -12,7 +12,7 @@ use Cake\Routing\Router;
     <title>DAPIER</title>
     <link rel="stylesheet" href="<?= Router::url('/') ?>webroot/css/style-tw.css" />
 </head>
-<body>
+<body class="bg-gray-200">
 <noscript>
     <strong>
         We're sorry but your browser doesn't support JavaScript. Please use an upgraded browser to continue.
