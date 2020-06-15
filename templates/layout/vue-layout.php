@@ -9,10 +9,10 @@ use Cake\Routing\Router;
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="favicon.ico">
-    <title>DAPIER</title>
+    <title>DAPIER | Data[base] driver API makER</title>
     <link rel="stylesheet" href="<?= Router::url('/') ?>webroot/css/style-tw.css" />
 </head>
-<body class="bg-gray-200">
+<body class="bg-gray-100">
 <noscript>
     <strong>
         We're sorry but your browser doesn't support JavaScript. Please use an upgraded browser to continue.
