@@ -1,5 +1,6 @@
 module.exports = {
     outputDir: 'webroot/vue',
-    runtimeCompiler: true
+    runtimeCompiler: true,
+    assetsPublicPath: 'webroot/'
 }
 
