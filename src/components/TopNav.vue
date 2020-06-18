@@ -1,5 +1,8 @@
 <template>
     <div class="w-40">
+        <div class="logo h-10 w-10 m-5">
+            <img src="img/logo.png" alt="DAPIER!" />
+        </div>
         <nav>
             <TopNavItem name="About" fillcolor="#AF3121" active="true"/>
             <TopNavItem name="Integrations" fillcolor="#E87A2E"/>
