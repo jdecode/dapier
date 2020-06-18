@@ -5,7 +5,7 @@
                 <rect stroke="#000" width="8" height="40" y="0" x="0" stroke-width="0" :fill="fillcolor"/>
             </g>
         </svg>
-        <span class="truncate text-sm -pt-1 pl-1" :class="{'font-bold': active}">
+        <span class="truncate text-sm -pt-1 pl-1" :class="{'font-bold text-lg': active}">
           {{name}}
         </span>
     </a>
