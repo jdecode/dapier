@@ -1,16 +1,18 @@
 <template>
-  <div id="homepage">
-    <Homepage/>
+  <div id="homepage" class="flex mx-20">
+      <TopNav/>
+      <Dashboard/>
   </div>
 </template>
 
 <script>
-import Homepage from './components/Homepage.vue'
-
+import TopNav from "./components/TopNav";
+import Dashboard from "./components/Dashboard";
 export default {
   name: 'App',
   components: {
-    Homepage
+    TopNav,
+    Dashboard
   }
 }
 </script>

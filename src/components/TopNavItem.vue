@@ -1,21 +1,23 @@
 <template>
-    <a href="#" class="group flex items-center px-3 text-sm leading-5 font-medium text-gray-600 rounded-md focus:outline-none transition ease-in-out duration-150" aria-current="page">
+    <router-link :to="to" class="group flex items-center px-3 leading-5 rounded-md focus:outline-none transition ease-in-out duration-150" aria-current="page">
         <svg width="8" height="40" xmlns="http://www.w3.org/2000/svg">
             <g>
                 <rect stroke="#000" width="8" height="40" y="0" x="0" stroke-width="0" :fill="fillcolor"/>
             </g>
         </svg>
-        <span class="truncate text-sm -pt-1 pl-1" :class="{'font-bold text-lg': active}">
+        <span class="truncate -pt-1 pl-1">
           {{name}}
         </span>
-    </a>
+    </router-link>
 </template>
 <script>
     export default {
+        name: 'TopNavItem',
         props: {
             name: String,
             fillcolor: String,
-            active: String
+            active: String,
+            to: String
         }
     };
 </script>
