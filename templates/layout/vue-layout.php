@@ -11,6 +11,7 @@ use Cake\Routing\Router;
     <link rel="icon" href="favicon.ico">
     <title>DAPIER</title>
     <link rel="stylesheet" href="<?= Router::url('/') ?>webroot/css/style-tw.css" />
+    <link rel="stylesheet" href="/webroot/fonts/font-awesome.min.css" />
 </head>
 <body>
     <noscript>
