@@ -64,6 +64,7 @@ $routes->scope('/', function (RouteBuilder $builder) {
      */
     $builder->connect('/', ['controller' => 'Pages', 'action' => 'vue']);
     $builder->connect('/app/github/oauth', ['controller' => 'Github', 'action' => 'oauth']);
+    $builder->connect('/app/github/callback', ['controller' => 'Github', 'action' => 'callback']);
 
     $builder->connect('/app/*', ['controller' => 'Pages', 'action' => 'vue']);
 
