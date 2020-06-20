@@ -63,7 +63,10 @@ $routes->scope('/', function (RouteBuilder $builder) {
      * to use (in this case, templates/Pages/home.php)...
      */
     $builder->connect('/', ['controller' => 'Pages', 'action' => 'vue']);
+    $builder->connect('/app/github/oauth', ['controller' => 'Github', 'action' => 'oauth']);
+
     $builder->connect('/app/*', ['controller' => 'Pages', 'action' => 'vue']);
+
 
     /*
      * ...and connect the rest of 'Pages' controller's URLs.
