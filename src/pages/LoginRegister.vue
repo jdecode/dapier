@@ -11,7 +11,7 @@
                     <span class="text-4xl">
                         <i class="fa fa-github"></i>
                     </span>
-                    <span class="pl-2">Sign in with GitHub</span>
+                    <span class="pl-2">Login with GitHub</span>
                 </a>
             </span>
         </div>
