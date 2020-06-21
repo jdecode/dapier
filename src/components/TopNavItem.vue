@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="to" class="group flex items-center px-3 leading-5 rounded-md focus:outline-none transition ease-in-out duration-150" aria-current="page">
+    <router-link :to="to" class="group flex items-center leading-5 rounded-md focus:outline-none transition ease-in-out duration-150" aria-current="page">
         <svg width="8" height="40" xmlns="http://www.w3.org/2000/svg">
             <g>
                 <rect stroke="#000" width="8" height="40" y="0" x="0" stroke-width="0" :fill="fillcolor"/>

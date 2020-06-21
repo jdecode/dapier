@@ -13,7 +13,7 @@
       </div>
       <footer class="flex-col text-center -mt-8">
           <!--<span style="color: #9400d3">D</span><span style="color: #2152B6">API</span><span style="color: #32691A">ER</span><span style="color: #E87A2E">&copy;</span><span style="color: #AF3121">2020</span>-->
-          DAPIER &copy; 2020
+          DAPIER 2020
       </footer>
   </div>
 </template>

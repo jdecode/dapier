@@ -3,7 +3,7 @@ import Home from './pages/Home';
 import Integrations from './pages/Integrations';
 import Docs from './pages/Docs';
 import Support from "./pages/Support";
-import LoginRegister from "./pages/LoginRegister";
+import Login from "./pages/Login";
 
 export default {
     base: '/app/',
@@ -35,8 +35,8 @@ export default {
             component: Support
         },
         {
-            path: '/login-register',
-            component: LoginRegister
+            path: '/login',
+            component: Login
         }
     ]
 }
