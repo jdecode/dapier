@@ -42,7 +42,7 @@ use Cake\Routing\RouteBuilder;
  * inconsistently cased URLs when used with `:plugin`, `:controller` and
  * `:action` markers.
  */
-/** @var \Cake\Routing\RouteBuilder $routes */
+/** @var RouteBuilder $routes */
 $routes->setRouteClass(DashedRoute::class);
 
 $routes->scope('/', function (RouteBuilder $builder) {
@@ -67,6 +67,8 @@ $routes->scope('/', function (RouteBuilder $builder) {
     $builder->connect('/app/github/callback', ['controller' => 'Github', 'action' => 'callback']);
 
     $builder->connect('/app/*', ['controller' => 'Pages', 'action' => 'vue']);
+
+    $builder->connect('/migrations', ['controller' => 'Utility', 'action' => 'migrations']);
 
 
     /*
