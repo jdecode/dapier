@@ -1,0 +1,51 @@
+version: "3"
+services:
+  dapier:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        BUILD: 'local'
+    image: dapier:1.1
+    ports:
+      - 8080:80
+    volumes:
+      - .:/var/www/html
+    links:
+      - ddb
+    depends_on:
+      - ddb
+    environment:
+      DDB_ENDPOINT: http://173.28.1.2:8000
+      DDB_REGION: ap-south-1
+      DDB_VERSION: latest
+      OAUTHAPP_GITHUB_CLIENT_ID: fd9cedc66fd0b6e0cd52
+      OAUTHAPP_GITHUB_CLIENT_SECRET: cbe8e0779779e27b4b2270e0525f9f17b37e28f1
+      OAUTHAPP_GITHUB_REDIRECT_URI: http://dapier.local/app/github/callback
+      DEBUG: 'true'
+      SECURITY_SALT: 49e558df8e733a6daedbe054a9ccd7add9d9a6efa8a96cf3248815c364b47391
+      SENTRY_DSN: https://39c8ac0866bc4171bdc2539819757cc0@o171093.ingest.sentry.io/5210080
+    networks:
+      testing_net:
+        ipv4_address: 173.28.1.1
+
+  ddb:
+    image: amazon/dynamodb-local:latest
+    ports:
+    - 8000:8000
+    volumes:
+      - db_data:/var/www/html/tmp/ddb-storage
+    environment:
+      AWS_ACCESS_KEY_ID: local
+      AWS_ACCESS_KEY_SECRET: local
+    networks:
+      testing_net:
+        ipv4_address: 173.28.1.2
+volumes:
+  db_data: {}
+networks:
+  testing_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 173.28.0.0/16
