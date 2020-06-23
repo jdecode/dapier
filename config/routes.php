@@ -63,8 +63,16 @@ $routes->scope('/', function (RouteBuilder $builder) {
      * to use (in this case, templates/Pages/home.php)...
      */
     $builder->connect('/', ['controller' => 'Pages', 'action' => 'vue']);
+
+    /**
+     * /app/github/*
+     * oauth => Go to GitHub for authorisation
+     * callback => Get access token from "code" (and redirect to dashboard)
+     */
     $builder->connect('/app/github/oauth', ['controller' => 'Github', 'action' => 'oauth']);
     $builder->connect('/app/github/callback', ['controller' => 'Github', 'action' => 'callback']);
+
+    $builder->connect('/app/dashboard', ['controller' => 'Users', 'action' => 'dashboard']);
 
     $builder->connect('/app/*', ['controller' => 'Pages', 'action' => 'vue']);
 

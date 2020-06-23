@@ -10,8 +10,8 @@ use Cake\Routing\Router;
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="favicon.ico">
     <title>DAPIER</title>
-    <link rel="stylesheet" href="/webroot/fonts/font-awesome.min.css" />
-    <link rel="stylesheet" href="<?= Router::url('/') ?>webroot/css/style-tw.css" />
+    <link rel="stylesheet" href="<?= Router::url('/') ?>fonts/font-awesome.min.css" />
+    <link rel="stylesheet" href="<?= Router::url('/') ?>css/style-tw.css" />
 </head>
 <body>
     <noscript>
@@ -26,8 +26,8 @@ use Cake\Routing\Router;
         If Vue would be running fine, you wouldn't be seeing this message!<br />
         Vue would use this element to load itself.
     </div>
-    <script type="text/javascript" defer src="<?= Router::url('/') ?>webroot/vue/js/chunk-vendors.js"></script>
-    <script type="text/javascript" defer src="<?= Router::url('/') ?>webroot/vue/js/app.js"></script>
+    <script type="text/javascript" defer src="<?= Router::url('/') ?>vue/js/chunk-vendors.js"></script>
+    <script type="text/javascript" defer src="<?= Router::url('/') ?>vue/js/app.js"></script>
 </body>
 </html>
 
