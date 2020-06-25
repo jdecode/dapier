@@ -1,6 +1,8 @@
 FROM jdecode/kode:2.1
 
-COPY . /var/www/html
+#COPY . /var/www/html
+
+COPY php/ini/conf.d/memory_limit.ini /usr/local/etc/php/conf.d/memory_limit.ini
 
 ## Run following when a composer dependency is changed
 #COPY composer.json /var/www/html/

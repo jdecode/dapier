@@ -17,6 +17,10 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Controller\Controller;
+use Exception;
+use PDA\PDA;
+use Aws\Sdk;
+use Aws\DynamoDb\DynamoDbClient;
 
 /**
  * Application Controller
@@ -28,6 +32,9 @@ use Cake\Controller\Controller;
  */
 class AppController extends Controller
 {
+    public PDA $pda;
+    public DynamoDbClient $dynamoDb;
+
     /**
      * Initialization hook method.
      *
@@ -36,6 +43,7 @@ class AppController extends Controller
      * e.g. `$this->loadComponent('FormProtection');`
      *
      * @return void
+     * @throws Exception
      */
     public function initialize(): void
     {
@@ -43,6 +51,12 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+
+        $this->dynamoDb = (new Sdk([
+                                       'region' => env('DDB_REGION', 'ap-south-1'),
+                                       'version' => env('DDB_VERSION', 'latest')
+                                   ]))->createDynamoDb();
+        $this->pda = new PDA($this->dynamoDb);
 
         /*
          * Enable the following component for recommended CakePHP form protection settings.

@@ -3,9 +3,11 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Aws\DynamoDb\Exception\DynamoDbException;
 use Cake\Core\Configure;
 use Cake\Http\Client;
 use Cake\Routing\Router;
+use Cake\Utility\Text;
 
 /**
  * Github Controller
@@ -65,17 +67,20 @@ class GithubController extends AppController
             ];
             $this->curlGithubUrl = 'https://github.com/login/oauth/access_token';
             $this->setCurlGithubPost($postvars);
-            return $this->redirect(Router::url('/app/dashboard?') . $this->getTokenFromParams($this->curlGithub()));
+            $token = $this->token($this->getAccessTokenFromParams($this->curlGithub()));
+            return $this->redirect(Router::url('/app?token=') . $token);
         }
         return $github_return;
     }
 
-    private function getTokenFromParams($params)
+    private function getAccessTokenFromParams($params, $key = null)
     {
+        $key = $key ?? 'access_token';
         $_params = explode('&', $params);
         foreach ($_params as $_param) {
-            if (stristr($_param, 'access_token=')) {
-                return $_param;
+            if (stristr($_param, $key.'=')) {
+                $val =  explode('=', $_param);
+                return $val[1];
             }
         }
         return '';
@@ -131,10 +136,69 @@ class GithubController extends AppController
         return $this->redirect($this->getGithubUrl());
     }
 
-    public function getUserInfo(string $access_token)
+    private function userInfo(string $access_token)
     {
-        $this->curlGithubToken = $access_token;
-        $this->curlGithubUrl = 'https://api.github.com/user';
-        return $this->curlGithub();
+        $ccn = curl_init();
+
+        curl_setopt($ccn, CURLOPT_URL, 'https://api.github.com/user');
+        curl_setopt($ccn, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ccn, CURLOPT_HTTPHEADER, array(
+            'User-Agent: jdecode',
+            "Authorization: token {$access_token}"
+        ));
+
+        $info = curl_exec($ccn);
+        curl_close($ccn);
+        return $info;
+    }
+    private function token($access_token)
+    {
+        $user = json_decode($this->userInfo($access_token), true);
+        $identity = [
+            'id_entity' => Text::uuid(),
+            'email' => $user['email'],
+            'github' => [
+                'name' => $user['name'],
+                'login' => $user['login'],
+                'nodeid' => $user['node_id'],
+                'photo' => $user['avatar_url']
+            ],
+            'active' => true,
+            'created' => time()
+        ];
+
+        $token = [
+            'token' => Text::uuid(),
+            'id_entity' => $identity['id_entity'],
+            'active' => true,
+            'created' => time(),
+            'last_active' => time(),
+            'source' => 'github',
+        ];
+
+        try {
+            $params = [
+                'TableName' => 'users',
+                'KeyConditionExpression' => "email = :email",
+                'ExpressionAttributeValues' => [
+                    ':email' => [
+                        'S' => $identity['email']
+                    ]
+                ],
+                'Limit' => 1
+            ];
+            $resp = $this->dynamoDb->query($params);
+            if (!$resp['Count']) {
+                $this->pda->insert('users', array_keys($identity), [array_values($identity)]);
+                $this->pda->insert('tokens', array_keys($token), [array_values($token)]);
+            }
+            if ($resp['Count']) {
+                $token['id_entity'] = $resp['Items'][0]['id_entity']['S'];
+                $this->pda->insert('tokens', array_keys($token), [array_values($token)]);
+            }
+            return $token['token'];
+        } catch (DynamoDbException $DynamoDbException) {
+            dd($DynamoDbException);
+        }
     }
 }
