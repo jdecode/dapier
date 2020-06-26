@@ -10,7 +10,7 @@ use Cake\Routing\Router;
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="favicon.ico">
     <title>DAPIER</title>
-    <link rel="stylesheet" href="<?= Router::url('/') ?>fonts/font-awesome.min.css" />
+    <link rel="stylesheet" href="<?= Router::url('/') ?>fonts/fontawesome-all.min.css" />
     <link rel="stylesheet" href="<?= Router::url('/') ?>css/style-tw.css" />
 </head>
 <body>
