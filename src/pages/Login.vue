@@ -1,5 +1,5 @@
 <template>
-    <div class="mr-64">
+    <div>
         <div class="flex justify-center">
             <span class="shadow-sm">
                 <a

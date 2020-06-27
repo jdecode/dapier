@@ -6,21 +6,20 @@
           id="homepage"
           class="h-screen"
       >
-          <div class="flex mx-20">
+          <div class="flex flex-col md:flex-row mx-0 md:mx-20 relative">
               <TopNav/>
               <Dashboard/>
           </div>
       </div>
-      <footer class="flex-col text-center -mt-8">
-          <!--<span style="color: #9400d3">D</span><span style="color: #2152B6">API</span><span style="color: #32691A">ER</span><span style="color: #E87A2E">&copy;</span><span style="color: #AF3121">2020</span>-->
-          DAPIER 2020
-      </footer>
+      <Foot/>
   </div>
 </template>
 
 <script>
 import TopNav from "./components/TopNav";
 import Dashboard from "./components/Dashboard";
+import Foot from "./components/Foot";
+
 export default {
     name: 'App',
     computed: {
@@ -30,7 +29,8 @@ export default {
     },
     components: {
         TopNav,
-        Dashboard
+        Dashboard,
+        Foot
     }
 }
 </script>

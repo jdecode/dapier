@@ -1,30 +1,20 @@
 <template>
-    <div class="w-4/5 mt-2">
-        <div class="flex flex-row-reverse mr-2">
-            <div class="dark-light-mode-toggler">
-                <span
-                    class="w-32 text-deepred cursor-pointer text-2xl"
-                    @click="modeUpdate"
-                    title="Toggle light/dark mode"
-                >
-                    <i class="fa fa-adjust"></i>
-                </span>
-            </div>
+    <div class="w-9/12 z-10 mx-auto flex-row">
+        <div>
+            <ul class="flex flex-row-reverse w-full">
+                <li>
+                    <router-link to="/login" class="text-2xl">
+                        <i class="fa fa-user"></i>
+                    </router-link>
+                </li>
+            </ul>
         </div>
-        <router-view class="p-1"></router-view>
+        <div>
+            <router-view class=""></router-view>
+        </div>
     </div>
 </template>
 <script>
     export default {
-        computed: {
-            dark() {
-                return this.$store.getters.DARK
-            }
-        },
-        methods: {
-            modeUpdate: function () {
-                this.$store.dispatch("THEME_UPDATE", !this.dark);
-            }
-        }
     };
 </script>
