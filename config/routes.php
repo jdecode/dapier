@@ -72,8 +72,6 @@ $routes->scope('/', function (RouteBuilder $builder) {
     $builder->connect('/app/github/oauth', ['controller' => 'Github', 'action' => 'oauth']);
     $builder->connect('/app/github/callback', ['controller' => 'Github', 'action' => 'callback']);
 
-    $builder->connect('/app/dashboard', ['controller' => 'Users', 'action' => 'dashboard']);
-
     $builder->connect('/app/*', ['controller' => 'Pages', 'action' => 'vue']);
 
     $builder->connect('/migrations', ['controller' => 'Utility', 'action' => 'migrations']);
@@ -98,6 +96,10 @@ $routes->scope('/', function (RouteBuilder $builder) {
      * routes you want in your application.
      */
     $builder->fallbacks();
+});
+
+$routes->scope('/api', function (RouteBuilder $builder) {
+    $builder->connect('/me', ['controller' => 'Users', 'action' => 'me']);
 });
 
 /*
