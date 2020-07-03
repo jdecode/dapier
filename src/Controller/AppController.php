@@ -16,11 +16,12 @@ declare(strict_types=1);
  */
 namespace App\Controller;
 
+use Aws\DynamoDb\Marshaler;
 use Cake\Controller\Controller;
-use Exception;
 use PDA\PDA;
 use Aws\Sdk;
 use Aws\DynamoDb\DynamoDbClient;
+use Cake\Http\Exception\NotFoundException;
 
 /**
  * Application Controller
@@ -34,6 +35,7 @@ class AppController extends Controller
 {
     public PDA $pda;
     public DynamoDbClient $dynamoDb;
+    public Marshaler $marshaler;
 
     /**
      * Initialization hook method.
@@ -43,7 +45,6 @@ class AppController extends Controller
      * e.g. `$this->loadComponent('FormProtection');`
      *
      * @return void
-     * @throws Exception
      */
     public function initialize(): void
     {
@@ -57,11 +58,26 @@ class AppController extends Controller
                                        'version' => env('DDB_VERSION', 'latest')
                                    ]))->createDynamoDb();
         $this->pda = new PDA($this->dynamoDb);
+        $this->marshaler = new Marshaler();
+
 
         /*
          * Enable the following component for recommended CakePHP form protection settings.
          * see https://book.cakephp.org/4/en/controllers/components/form-protection.html
          */
         //$this->loadComponent('FormProtection');
+    }
+
+    public function error($message = '', $code = 404)
+    {
+        throw new NotFoundException($message, $code);
+    }
+
+    public function resp($data = [], $code = 200)
+    {
+        $this->response = $this->response->withType('application/json');
+        $this->response = $this->response->withStatus($code);
+        $this->response = $this->response->withStringBody(json_encode($data));
+        return $this->response;
     }
 }
