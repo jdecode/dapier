@@ -15,7 +15,8 @@
             <TopNavItem name="Integrations" fillcolor="#E87A2E" to="integrations" />
             <TopNavItem name="Docs" fillcolor="#32691A" to="docs" />
             <TopNavItem name="Support" fillcolor="#2152B6" to="support" />
-            <TopNavItem name="Login" fillcolor="#9400d3" to="login" />
+            <TopNavItem name="Login" fillcolor="#9400d3" to="login" v-if="!auth" />
+            <TopNavItem name="Dashboard" fillcolor="#9400d3" to="dashboard" v-if="auth" />
         </nav>
     </div>
 </template>
@@ -25,6 +26,11 @@
         data: function () {
             return {
                 showMenu: false
+            }
+        },
+        computed: {
+            auth() {
+                return this.$store.getters.AUTH
             }
         },
         name: 'TopNav',
