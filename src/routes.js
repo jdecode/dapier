@@ -4,6 +4,8 @@ import Integrations from './pages/Integrations';
 import Docs from './pages/Docs';
 import Support from "./pages/Support";
 import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import Profile from "./pages/Profile";
 
 export default {
     base: '/app/',
@@ -37,6 +39,14 @@ export default {
         {
             path: '/login',
             component: Login
+        },
+        {
+            path: '/dashboard',
+            component: Dashboard
+        },
+        {
+            path: '/profile',
+            component: Profile
         }
     ]
 }
