@@ -38,6 +38,13 @@ export default new Vuex.Store({
             localStorage.token = token;
             state.token = token;
         }),
+        LOGOUT: ((state) => {
+            localStorage.removeItem('token');
+            state.token = '';
+            if(this.$router.currentRoute.path !== '/login') {
+                this.$router.replace('/login').then();
+            }
+        }),
         USER_UPDATE: ((state, user) => {
             state.user = user;
         })
@@ -54,6 +61,9 @@ export default new Vuex.Store({
         }),
         TOKEN_UPDATE: ((context, token) => {
             context.commit('TOKEN_UPDATE', token);
+        }),
+        LOGOUT: ((context) => {
+            context.commit('LOGOUT');
         })
     }
 });
