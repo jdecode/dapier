@@ -3,9 +3,9 @@
         <div>
             <ul class="flex flex-row-reverse">
                 <li v-if="auth" class="w-8 h-8 flex items-center cursor-pointer">
-                    <a href="/logout" class="text-2xl mx-auto" title="Logout">
+                    <span @click="logout()" class="text-2xl mx-auto" title="Logout">
                         <i class="fa fa-sign-out"></i>
-                    </a>
+                    </span>
                 </li>
                 <li class="w-8 h-8 flex items-center cursor-pointer mx-4">
                     <router-link to="/login" class="text-2xl mx-auto" v-if="!auth">
@@ -33,6 +33,11 @@
             },
             user() {
                 return this.$store.getters.USER
+            }
+        },
+        methods: {
+            logout () {
+                this.$store.dispatch("LOGOUT").then();
             }
         }
     };
