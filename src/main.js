@@ -29,7 +29,7 @@ new Vue({
     methods: {
         checkToken: function() {
             this.setToken();
-            this.getUser();
+            this.getUser().then();
             this.clearTokenParam();
         },
         setMode: function () {
@@ -49,14 +49,9 @@ new Vue({
                 token = this.$route.query.token;
             }
             if(token === '') {
-                this.logout();
+                this.$store.dispatch("LOGOUT").then();
             }
             this.token = token;
-        },
-        logout: function () {
-            localStorage.removeItem('token');
-            console.log('Bye bye...!');
-            window.location.href = '/app/login';
         },
         getUser: async function () {
             let nivedanToken = this.token;
@@ -77,7 +72,7 @@ new Vue({
                 this.$store.dispatch("USER_UPDATE", user).then();
                 this.$store.dispatch("AUTH_UPDATE", true).then();
             } catch (error) {
-                this.logout();
+                this.$store.dispatch("LOGOUT").then();
             }
         },
         clearTokenParam: function () {
