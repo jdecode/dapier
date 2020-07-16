@@ -49,11 +49,15 @@ new Vue({
                 token = this.$route.query.token;
             }
             if(token === '') {
-                this.$store.dispatch("LOGOUT").then();
+                this.$store.dispatch("LOGOUT", this.$router).then();
+                return;
             }
             this.token = token;
         },
         getUser: async function () {
+            if(this.token === '') {
+                return;
+            }
             let nivedanToken = this.token;
             nivedan.defaultConfig({
                 baseURL: '/api',
@@ -72,7 +76,7 @@ new Vue({
                 this.$store.dispatch("USER_UPDATE", user).then();
                 this.$store.dispatch("AUTH_UPDATE", true).then();
             } catch (error) {
-                this.$store.dispatch("LOGOUT").then();
+                this.$store.dispatch("LOGOUT", this.$router).then();
             }
         },
         clearTokenParam: function () {
