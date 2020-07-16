@@ -3,7 +3,7 @@
         <div>
             <ul class="flex flex-row-reverse">
                 <li v-if="auth" class="w-8 h-8 flex items-center cursor-pointer">
-                    <span @click="logout()" class="text-2xl mx-auto" title="Logout">
+                    <span @click="this.logout()" class="text-2xl mx-auto" title="Logout">
                         <i class="fa fa-sign-out"></i>
                     </span>
                 </li>
@@ -37,7 +37,7 @@
         },
         methods: {
             logout () {
-                this.$store.dispatch("LOGOUT").then();
+                this.$store.dispatch("LOGOUT", this.$router).then();
             }
         }
     };
