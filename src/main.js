@@ -19,7 +19,7 @@ new Vue({
     data: {
         token: ''
     },
-    created ()
+    created()
     {
     },
     beforeMount() {
@@ -27,35 +27,35 @@ new Vue({
         this.checkToken();
     },
     methods: {
-        checkToken: function() {
+        checkToken: function () {
             this.setToken();
             this.getUser().then();
             this.clearTokenParam();
         },
         setMode: function () {
             let lightMode = true;
-            if(typeof localStorage.isDark !== 'undefined') {
+            if (typeof localStorage.isDark !== 'undefined') {
                 lightMode = JSON.parse(localStorage.isDark);
             }
             this.$store.dispatch("THEME_UPDATE", lightMode).then();
         },
         setToken: function () {
             let token = '';
-            if(typeof this.$route.query.token === 'undefined') {
+            if (typeof this.$route.query.token === 'undefined') {
                 if (localStorage.token) {
                     token = localStorage.token;
                 }
             } else {
                 token = this.$route.query.token;
             }
-            if(token === '') {
+            if (token === '') {
                 this.$store.dispatch("LOGOUT", this.$router).then();
                 return;
             }
             this.token = token;
         },
         getUser: async function () {
-            if(this.token === '') {
+            if (this.token === '') {
                 return;
             }
             let nivedanToken = this.token;
@@ -80,7 +80,7 @@ new Vue({
             }
         },
         clearTokenParam: function () {
-            if( typeof this.$route.query.token !== 'undefined' && this.$route.query.token.length > 0) {
+            if ( typeof this.$route.query.token !== 'undefined' && this.$route.query.token.length > 0) {
                 this.$router.replace(this.$router.currentRoute.path).then();
             }
         }

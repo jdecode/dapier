@@ -1,6 +1,7 @@
 <?php
 
 /** @noinspection PhpMissingFieldTypeInspection */
+
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -63,15 +64,15 @@ class UsersController extends AppController
 
         $eav = $this->marshaler->marshalJson('
             {
-                ":token": "'.$token.'"
+                ":token": "' . $token . '"
             }
         ');
 
         $params = [
             'TableName' => 'tokens',
             'KeyConditionExpression' => '#token = :token',
-            'ExpressionAttributeNames'=> [ '#token' => 'token' ],
-            'ExpressionAttributeValues'=> $eav
+            'ExpressionAttributeNames' => [ '#token' => 'token' ],
+            'ExpressionAttributeValues' => $eav
         ];
 
         try {
@@ -83,7 +84,7 @@ class UsersController extends AppController
             $id_entity = $_token['Items'][0]['id_entity']['S'];
             $eav = $this->marshaler->marshalJson('
                     {
-                        ":id_entity": "'.$id_entity.'"
+                        ":id_entity": "' . $id_entity . '"
                     }
                 ');
 
@@ -91,8 +92,8 @@ class UsersController extends AppController
                 'TableName' => 'users',
                 'IndexName' => 'sort_id_entity',
                 'KeyConditionExpression' => '#id_entity = :id_entity',
-                'ExpressionAttributeNames'=> [ '#id_entity' => 'id_entity' ],
-                'ExpressionAttributeValues'=> $eav
+                'ExpressionAttributeNames' => [ '#id_entity' => 'id_entity' ],
+                'ExpressionAttributeValues' => $eav
             ];
             $me = $this->dynamoDb->query($params);
             if (!$me['Count'] || !$me['Items'][0]['active']['BOOL']) {

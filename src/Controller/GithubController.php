@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -78,7 +79,7 @@ class GithubController extends AppController
         $key = $key ?? 'access_token';
         $_params = explode('&', $params);
         foreach ($_params as $_param) {
-            if (stristr($_param, $key.'=')) {
+            if (stristr($_param, $key . '=')) {
                 $val =  explode('=', $_param);
                 return $val[1];
             }
@@ -106,7 +107,7 @@ class GithubController extends AppController
         return $output;
     }
 
-    private function setCurlGithubHeaders(String $header)
+    private function setCurlGithubHeaders(string $header)
     {
         $this->curlGithubHeaders[] = $header;
     }
